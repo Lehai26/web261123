@@ -71,5 +71,17 @@ function applySort() {
 
 applySort();
 
+document.getElementById("q").addEventListener("input", (e) => {
+  const keyword = e.target.value.trim().toLowerCase();
+  const found = movies.filter(m => m.title.toLowerCase().includes(keyword));
+  renderCards(found);
+});
+
+function getView() {
+  const keyword = document.getElementById("q").value.trim().toLowerCase();
+  const found = movies.filter(m => m.title.toLowerCase().includes(keyword));
+  const key = document.getElementById("sort").value;
+  return sortBy(found, key, key !== "title");
+}
 
 

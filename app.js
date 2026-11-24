@@ -48,10 +48,16 @@ function renderCards(list) {
  <div class="info">
  <h2>${m.title}</h2>
  <p class="year">${m.year}</p>
+ <button class="like" type="button">♥</button>
  </div>`;
         board.appendChild(card);
     }
     document.getElementById("count").textContent = list.length + "편";
+    updateLikeCount();
+
+     
+if (list.length === 0) { board.classList.add("is-empty"); } else 
+{ board.classList.remove("is-empty"); }
 }
 // sortBy : 영화 배열, 키 이름, 내림차순 여부 ⇒ 정렬한 새 배열(원본은 그대로)
 function sortBy(list, key, desc) {
@@ -65,17 +71,16 @@ function sortBy(list, key, desc) {
 }
 // applySort : 선택 상자 값으로 정렬해서 다시 그리기(반환값 없음)
 function applySort() {
- const key = document.getElementById("sort").value;
- renderCards(sortBy(movies, key, key !== "title"));
+ renderCards(getView());
 }
 
 applySort();
+document.getElementById("sort").addEventListener("change", applySort);
 
 document.getElementById("q").addEventListener("input", (e) => {
-  const keyword = e.target.value.trim().toLowerCase();
-  const found = movies.filter(m => m.title.toLowerCase().includes(keyword));
-  renderCards(found);
+ renderCards(getView());
 });
+
 
 function getView() {
   const keyword = document.getElementById("q").value.trim().toLowerCase();
@@ -84,4 +89,21 @@ function getView() {
   return sortBy(found, key, key !== "title");
 }
 
+//(e) => {}와 function(e) {}는 둘 다 버튼을 클릭하는 것과 같은 이벤트를 실행할 수 있하지만 
+// (e) => {}가 코드가 더 짧고 작성하기 쉽다. 
+// 사진에서 확인한 결과, function(e)를 사용하면 this가 클릭한 버튼을 가리키지만
+// (e) => {}를 사용하면 this가 Window로 나타난다. 
+// 하지만 두 가지 방법 모두 e를 통해 이벤트 정보를 가져올 수 있고, 같은 기능을 실행할 수 있다.
+document.querySelector(".board").addEventListener("click", (e) =>{
+   
+     if (e.target.classList.contains("like")) { e.target.classList.toggle("liked"); updateLikeCount(); } });
 
+
+ 
+function updateLikeCount() { document.getElementById("likeCount").textContent = 
+document.querySelectorAll(".liked").length; }
+
+
+
+document.getElementById("q").addEventListener("keydown", (e) => { if (e.key === "Escape") 
+{ e.target.value = ""; renderCards(getView()); } });

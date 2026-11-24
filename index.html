@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>여상수 :: 내 영화 보드</title>
+    <title>레탄하이 :: 내 영화 보드</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap"
@@ -44,6 +44,7 @@
             <div class="toolbar">
                 <input id="q" type="search" placeholder="영화 제목 검색">
     <p id="count"></p>
+    <p>찜 <span id="likeCount">0</span>편</p>
 
     <label for="sort">정렬</label>
 
@@ -59,10 +60,8 @@
 
 
 
-            <div class="board" id = "board">
-                
-                
-            </div>
+            <div class="board" id = "board"></div>
+             <p class="state-empty">조건에 맞는 영화가 없습니다.</p>
         </section>
 
 

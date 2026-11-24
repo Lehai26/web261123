@@ -1,4 +1,4 @@
-// app.js : 영화 배열을 다루는 함수 6개 / 여상수(09) / 10주차
+// app.js : 영화 배열을 다루는 함수 6개 / 레탄하이(2551017) / 10주차
 // average : 영화 배열 ⇒ 평균 평점(숫자)
 
 const average = list => {
@@ -51,7 +51,7 @@ function renderCards(list) {
  </div>`;
         board.appendChild(card);
     }
-    getElementById("count").textContent = list.length + "6편";
+    document.getElementById("count").textContent = list.length + "편";
 }
 // sortBy : 영화 배열, 키 이름, 내림차순 여부 ⇒ 정렬한 새 배열(원본은 그대로)
 function sortBy(list, key, desc) {
